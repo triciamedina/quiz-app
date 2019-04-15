@@ -1,0 +1,81 @@
+<!-- This is my wireframe for my quiz app. For wireframe purposes, each screen is displayed -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Blockchain Quiz</title>
+        <meta name="description" content="A quiz to test your knowledge of blockchain technology">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            
+        <!-- Normalize styles -->
+        <link rel="stylesheet" href="normalize.css">
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+    <!-- Start Screen Wireframe -->
+        <section class="container">
+            <header>
+                <h1>What Is Blockchain?</h1>
+            </header>
+            <p>You may have heard of the cryptocurrency Bitcoin, but how much do you really know about the technology behind it?</p>
+            <button>Start Quiz</button>
+        </section>
+
+    <!-- Question Screen Wireframe -->
+        <section class="container">
+            <header>
+                <span id="score">Score: 0</span>
+                <h2>Question 1 of 10</h2>
+            </header>
+            <form>
+                <fieldset>
+                    <legend class="question">So, what is blockchain?</legend>
+                    <div class="radio-container">
+                        <input type="radio" name="question" id="answer-1" value="0" required>
+                        <label for="answer-1">A company founded by Satoshi Nakamoto that created Bitcoin</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" name="question" id="answer-2" value="1" required>
+                        <label for="answer-2">An app that lets you purchase, sell, and mine various types of cryptocurrency</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" name="question" id="answer-3" value="1" required>
+                        <label for="answer-3">A distributed and public digital ledger that is used to record transactions across a network</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" name="question" id="answer-4" value="1" required>
+                        <label for="answer-4">A video game that allows players to purchase, collect, breed, and sell various types of virtual cats</label>
+                    </div>
+                </fieldset>
+                <button type="submit" role="button">Submit</button>
+            </form>
+         </section>
+
+    <!-- Answer Screen Wireframe -->
+        <section class="container">
+            <header>
+                <h2>Score: 1</h2>
+                <div class="result">That&rsquo;s Right!</div>
+            </header>
+            <div class="correct-answer">
+                <p>Blockchain technology is neither a company nor an app. At its most basic level, a blockchain is a growing list of records containing digital information (the “blocks”), which are linked using cryptography. Data contained within the blockchain is stored in a public database distributed across computers in a network so that any involved record cannot be altered retroactively, without the alteration of all subsequent blocks.</p>
+            </div>    
+            <button role="button">Next</button>
+        </section>
+
+    <!-- Final Results Screen Wireframe -->
+        <section class="container">
+            <header>
+                <h1>Nice Job.</h1>
+                <h2>You scored 10 out of 10</h2>
+            </header>
+            <p>Congrats! You know your stuff. Now get out there and blockchain responsibly. </p>
+            <button role="button">Try Again</button>
+        </section>
+        
+    </body>
+</html>
