@@ -6,8 +6,9 @@ function handleStartQuiz() {
     // Upon starting quiz, current question is set to index 0
     // Upon clicking start quiz, the welcome screen/results screen is hidden
     // Upon clicking start quiz, the quiz is display beginning with the first question
-
-    console.log("`handleStartQuiz` ran");
+    $(".js-start-quiz").on("click", function(event) {
+        console.log("`handleStartQuiz` ran");
+    });
 }
 
 // WILL NEED SOMETHING TO HOLD CURRENT QUESTION
