@@ -12,9 +12,8 @@ function handleStartQuiz() {
         scoreCount = 0;
         questionCount = 0;
 
-        // Hide current screen
+        // Hide current screen. Note – This also works: $(this).closest("section").hide();
         $(this).closest("section").addClass("js-hide");
-        // Note – This also works: $(this).closest("section").hide();
 
         // Render quiz
         handleRenderQuiz();
@@ -69,17 +68,15 @@ function handleRenderQuiz() {
 
 function handleSubmitAnswer() {
 
-    // Listens for when form is submitted
     $("#js-quiz-form").submit(function(event) {
 
+        // If true increment score by 1
         if (handleIsAnswerTrueOrFalse() == true) {
-            // If true increment score by 1
             scoreCount++;
         }
        
-        // Hide quiz
+        // Hide quiz. Note – This also works: $(this).closest("section").hide();
         $(this).closest("section").addClass("js-hide");
-        // Note – This also works: $(this).closest("section").hide();
 
         // Display answer
         handleRenderAnswer();
@@ -113,7 +110,7 @@ function generateCurrentAnswer() {
 }
 
 function handleRenderAnswer() {
-    // Renders explanation and next button in DOM
+    // Renders answer and next button in DOM
     const answerElement = generateCurrentAnswer();
     $("body").prepend(answerElement);
 
@@ -127,12 +124,11 @@ function handleRenderAnswer() {
 function handleClickNextQuestion() {
 
     $(".js-next-question").on("click", function(event) {
-        // Upon clicking the next button current question is incremented by 1 
+        // Current question is incremented by 1 
         questionCount++;
 
-        // Hide answer screen
+        // Hide answer screen. Note – This also works: $(this).closest("section").hide();
         $(this).closest("section").addClass("js-hide");
-        // Note – This also works: $(this).closest("section").hide();
 
         if (questionCount < STORE.length) {
             // Display quiz
@@ -140,7 +136,7 @@ function handleClickNextQuestion() {
         } else {
             // Display results
             handleRenderResults();
-        }   
+        };
     })
 
     console.log("`handleClickNextQuestion` ran");
