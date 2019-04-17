@@ -1,65 +1,170 @@
 'use strict';
 
+// Hold question count and score count
+let questionCount;
+let scoreCount;
+
 function handleStartQuiz() {
-    // The starting screen should have a button that users can click to start the quiz
-    // The results screen should have a button that users can click to start quiz
-    // Upon starting quiz, current question is set to index 0
-    // Upon clicking start quiz, the welcome screen/results screen is hidden
-    // Upon clicking start quiz, the quiz is display beginning with the first question
+
     $(".js-start-quiz").on("click", function(event) {
+        
+        // Upon starting quiz, questionCount and scoreCount are set to 0
+        scoreCount = 0;
+        questionCount = 0;
+
+        // Hide current screen
+        $(this).closest("section").addClass("js-hide");
+        // Note – This also works: $(this).closest("section").hide();
+
+        // Render quiz
+        handleRenderQuiz();
+
         console.log("`handleStartQuiz` ran");
     });
 }
 
-// WILL NEED SOMETHING TO HOLD CURRENT QUESTION
+function generateCurrentQuestion() {
+
+    // Looks up current question and stores question and options HTML
+    const currentQuestion = STORE[questionCount];
+    return `<section class="container">
+            <header>
+                <span id="score">Score: ${scoreCount}</span>
+                <h2>Question ${currentQuestion.number} of 10</h2>
+            </header>
+            <form id="js-quiz-form">
+            <fieldset>
+                <legend class="question">${currentQuestion.question}</legend>
+                <div class="radio-container">
+                    <input type="radio" name="question" id="answer-1" value="0" required>
+                    <label for="answer-1">${currentQuestion.options[0]}</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="question" id="answer-2" value="1" required>
+                    <label for="answer-2">${currentQuestion.options[1]}</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="question" id="answer-3" value="1" required>
+                    <label for="answer-3">${currentQuestion.options[2]}</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="question" id="answer-4" value="1" required>
+                    <label for="answer-4">${currentQuestion.options[3]}</label>
+                </div>
+            </fieldset>
+            <button type="submit" role="button" class="js-submit-answer">Submit</button>
+            </form>
+        </section>`
+}
 
 function handleRenderQuiz() {
-    // This function displays the current question and choices
-    // Users should also be able to see which question they're on (for instance, "7 out of 10")
-    // Users should also be able to see their current score ("5 correct, 2 incorrect")
-    // Users should be shown a submit button
 
+    // Renders current question and choices in the DOM
+    const quizElement = generateCurrentQuestion();
+    $("body").prepend(quizElement);
+
+    handleSubmitAnswer();
     console.log("`handleRenderQuiz` ran");
 }
 
-// WILL NEED SOMETHING TO HOLD CURRENT SCORE
-
 function handleSubmitAnswer() {
-    // Upon submitting a correct answer the score is incremented by 1
-    // Upon submitting an incorrect answer the score is unchanged
-    // Upon clicking submit the quiz is hidden and answer is rendered
 
+    // Listens for when form is submitted
+    $("#js-quiz-form").submit(function(event) {
+
+        if (handleIsAnswerTrueOrFalse() == true) {
+            // If true increment score by 1
+            scoreCount++;
+        }
+       
+        // Hide quiz
+        $(this).closest("section").addClass("js-hide");
+        // Note – This also works: $(this).closest("section").hide();
+
+        // Display answer
+        handleRenderAnswer();
+
+        event.preventDefault();
+        console.log("Button works!");
+    });
+    
     console.log("`handleSubmitAnswer` ran");
 }
 
 function handleIsAnswerTrueOrFalse () {
-    // Upon submitting an answer, this function checks whether answer is correct and returns a value of true or false
+    // Get the value of the option submitted and compare to currentQuestion.answer
 
     console.log("`handleIsAnswerTrueOrFalse` ran");
 }
 
+function generateCurrentAnswer() {
+    // Looks up current question and stores explanation in HTML
+    const currentQuestion = STORE[questionCount];
+    return `<section class="container">
+                <header>
+                    <h2>Score: 1</h2>
+                    <div class="result">That&rsquo;s Right!</div>
+                </header>
+                <div class="correct-answer">
+                    <p>${currentQuestion.explanation}</p>
+                </div>    
+                <button role="button" class="js-next-question">Next</button>
+            </section>`
+}
+
 function handleRenderAnswer() {
+    // Renders explanation and next button in DOM
+    const answerElement = generateCurrentAnswer();
+    $("body").prepend(answerElement);
+
     // If answer is false, text feedback will display incorrect
     // If answer is true, text feedback will display correct
-    // Whether true or false, a text explanation of the correct answer is shown
-    // Whether whether true or false, users will be shown a button to move onto the next question
 
+    handleClickNextQuestion();
     console.log("`handleRenderAnswer` ran");
 }
 
 function handleClickNextQuestion() {
-    // Upon clicking the next button current question is incremented by 1 
-    // Upon clicking the next button answer is hidden and quiz is displayed 
+
+    $(".js-next-question").on("click", function(event) {
+        // Upon clicking the next button current question is incremented by 1 
+        questionCount++;
+
+        // Hide answer screen
+        $(this).closest("section").addClass("js-hide");
+        // Note – This also works: $(this).closest("section").hide();
+
+        if (questionCount < STORE.length) {
+            // Display quiz
+            handleRenderQuiz();  
+        } else {
+            // Display results
+            handleRenderResults();
+        }   
+    })
 
     console.log("`handleClickNextQuestion` ran");
 }
 
+function generateResults() {
+    return `<section class="container">
+                <header>
+                    <h1>Nice Job.</h1>
+                    <h2>You scored 10 out of 10</h2>
+                </header>
+                <p>Congrats! You know your stuff. Now get out there and blockchain responsibly. </p>
+                <button role="button" class="js-start-quiz">Try Again</button>
+            </section>`
+}
+
 function handleRenderResults() {
-    // Upon reaching the end of the quiz the quiz is hidden and results screen is shown
+    const resultsElement = generateResults();
+    $("body").prepend(resultsElement);
+    
     // Users should be shown their current score
     // Depending on the users score range, text feedback is shown
-    // Users should be shown a button to restart the quiz
 
+    handleStartQuiz();
     console.log("`handleRenderResults` ran");
 }
 

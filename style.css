@@ -63,3 +63,7 @@ fieldset {
 .correct-answer p {
     margin: 0px;
 }
+
+.js-hide {
+    display: none;
+}

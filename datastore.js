@@ -2,6 +2,7 @@
 
 const STORE = [
     {
+        number: 1,
         question: "So, what is blockchain?",
         options: [
             "A company founded by Satoshi Nakamoto that created Bitcoin",
@@ -13,6 +14,7 @@ const STORE = [
         explanation: "Blockchain technology is neither a company nor an app. At its most basic level, a blockchain is a growing list of records containing digital information (the “blocks”), which are linked using cryptography. Data contained within the blockchain is stored in a public database distributed across computers in a network so that any involved record cannot be altered retroactively, without the alteration of all subsequent blocks.",
     },
     {
+        number: 2,
         question: "What kind of information can be recorded on a blockchain?",
         options: [
             "Monetary transactions",
@@ -23,7 +25,8 @@ const STORE = [
         answer: "All of the above",
         explanation: "The information recorded on a blockchain can take on any form, whether it be denoting a transfer of money, ownership, a transaction, someone’s identity, music, an agreement between two parties, or even how much electricity a lightbulb has used.",
     },
-    {
+    {   
+        number: 3,
         question: "A blockchain database is managed using what kind of network?",
         options: [
             "Virtual private network",
@@ -34,7 +37,8 @@ const STORE = [
         answer: "Peer-to-peer network",
         explanation: "Rather than keeping information in one central point, as is done by traditional recording methods, blockchain is managed by a peer-to-peer network. A peer-to-peer network is a decentralized and interconnected network that shares tasks or workloads—such as processing power or data storage—between all participants equally. What they create, store, or transfer is made available to everyone on the network.",
     },
-    {
+    {   
+        number: 4,
         question: "What is a node?",
         options: [
             "A currency which is used for making or receiving payments on the blockchain",
@@ -46,6 +50,7 @@ const STORE = [
         explanation: "A node can be any active electronic device, including a computer, phone or even a printer, as long as it is connected to the internet and as such has an IP address. The role of a node is to support the network by maintaining a copy of a blockchain and, in some cases, to process transactions. All nodes are equal in importance on a blockchain, but a node can have different roles in making a blockchain work.",
     },
     {
+        number: 5,
         question: "Which aspect of blockchain technology ensures that all nodes in a network are synchronized and agree on the validity of a transaction?",
         options: [
             "Consensus protocols",
@@ -57,6 +62,7 @@ const STORE = [
         explanation: "A consensus protocol is a set of rules that describe how the communication and transmission of data between electronic devices, such as nodes, works. Consensus is achieved when enough devices are in agreement about what is true and what should be recorded onto a blockchain. Therefore, consensus protocols are the governing rules that allow devices that are scattered across the world to factually come to an agreement, allowing a blockchain network to function without being corrupted."
     },
     {
+        number: 6,
         question: "There are a variety of consensus protocols in blockchain. What is the consensus protocol introduced by Bitcoin?",
         options: [
             "Proof of Stake",
@@ -67,7 +73,8 @@ const STORE = [
         answer: "Proof of Work",
         explanation: "Proof of work is the consensus protocol introduced by Bitcoin and used widely by many other cryptocurrencies. The process is known as mining and the nodes on the network are known as “miners”. The “proof of work” comes in the form of an answer to a mathematical problem, one that requires considerable work to arrive at, but is easily verified to be correct once the answer has been reached. However, many regard proof of work as flawed and even unethical, since it has been reported that a single Bitcoin transaction, using proof of work, can consume as much electricity as an average Dutch household does in two weeks.",
     },
-    {
+    {   
+        number: 7,
         question: "What is cryptography?",
         options: [
             "The study and practice of making maps",
@@ -78,7 +85,8 @@ const STORE = [
         answer: "The study and practice of encrypting and decrypting information",
         explanation: "Cryptography is the method of disguising and revealing, otherwise known as encrypting and decrypting information so that it can only be viewed by the intended recipients and nobody else. In modern terms, this is done through complex mathematics. The method involves taking unencrypted data, such as a piece of text, and encrypting it using a mathematical algorithm, known as a cipher.",
     },
-    {
+    {   
+        number: 8,
         question: "What type of cryptography is used in blockchain?",
         options: [
             "Symmetric-key cryptography",
@@ -89,7 +97,8 @@ const STORE = [
         answer: "Public-key cryptography",
         explanation: "Public-key cryptography, or asymmetric cryptography, is a cryptographic system that uses pairs of keys: public keys which are used to encrypt and may be disseminated widely, and private keys which are used to decrypt and known only to the owner. This type of cryptography is considerably better suited to blockchain technology compared to symmetric-key cryptography because a user can send their public key to anyone without worrying that someone will gain access to their private key.",
     },
-    {
+    {   
+        number: 9,
         question: "One of the key properties of blockchain is immutability. What gives blockchain this property?",
         options: [
             "Cryptographic hash functions",
@@ -100,7 +109,8 @@ const STORE = [
         answer: "Cryptographic hash functions",
         explanation: "Immutability, in the context of the blockchain, means that once something has been entered into the blockchain, it cannot be tampered with. The reason why the blockchain gets this property is that of cryptographic hash function. A cryptographic hash function is a hash function which takes an input (or “message”) and returns an alphanumeric string of a fixed-length. Changing any record that has previously happened on a blockchain would change all the hashes, making them false and obsolete.",
     },
-    {
+    {   
+        number: 10,
         question: "Blockchain is often described as what?",
         options: [
             "Trustless",
