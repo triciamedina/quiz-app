@@ -8,23 +8,13 @@ function handleStartQuiz() {
     questionCount = 0;
 
     $(".js-start-quiz").on("click", function(event) {
-        handleHideScreen();
-        handleRenderQuiz();  
+        renderQuiz();  
         console.log("`handleStartQuiz` ran");
     });
 }
 
-function handleHideScreen() {
-    // Note – This also works: $("section").hide();
-    // Animation can go here?
-    $("section").addClass("js-hide");
-    // $("section").slideUp();
-    console.log("`hideScreen` ran");
-}
-
 function generateCurrentQuestion() {
-    return `<section class="container">
-            <header>
+    return `<header>
                 <span id="score">Score: ${scoreCount}</span>
                 <h2>Question ${STORE[questionCount].number} of 10</h2>
             </header>
@@ -49,19 +39,18 @@ function generateCurrentQuestion() {
                 </div>
             </fieldset>
             <button type="submit" role="button" class="js-submit-answer">Submit</button>
-            </form>
-        </section>`
+            </form>`
 }
 
-function handleRenderQuiz() {
+function renderQuiz() {
     let quizElement = generateCurrentQuestion();
     // Animation can go here?
-    $("body").prepend(quizElement);
+    $(".container").html(quizElement);
     handleSubmitAnswer();
     console.log("`handleRenderQuiz` ran");
 }
 
-function handleUpdateScoreCount() {
+function updateScoreCount() {
     scoreCount++;
 }
 
@@ -71,12 +60,10 @@ function handleSubmitAnswer() {
         let correctAnswer = STORE[questionCount].answer;
 
         if (selected === correctAnswer) {
-            handleUpdateScoreCount();
-            handleHideScreen();
+            updateScoreCount();
             renderAnswerCorrect();
             console.log('answer is correct');
         } else {
-            handleHideScreen();
             renderAnswerWrong();
             console.log("answer is wrong");
         }
@@ -89,28 +76,25 @@ function handleSubmitAnswer() {
 
 function renderAnswerCorrect() {
     let answerElement = 
-    `<section class="container">
-        <header>
+    `<header>
             <h2>Score: ${scoreCount}</h2>
             <div class="result">That's Right!</div>
-        </header>
-        <div class="correct-answer">
-            <p>${STORE[questionCount].explanation}</p>
-        </div>    
-        <button role="button" class="js-next-question">Next</button>
-    </section>`
+    </header>
+    <div class="correct-answer">
+        <p>${STORE[questionCount].explanation}</p>
+    </div>    
+    <button role="button" class="js-next-question">Next</button>`
     
-    $("body").prepend(answerElement);
+    $(".container").html(answerElement);
     handleClickNextQuestion();
     console.log("`handleRenderAnswer` ran");
 }
 
 function renderAnswerWrong() {
     let answerElement = 
-    `<section class="container">
-        <header>
-            <h2>Score: ${scoreCount}</h2>
-            <div class="result">That's Wrong!</div>
+    `<header>
+        <h2>Score: ${scoreCount}</h2>
+        <div class="result">That's Wrong!</div>
         </header>
         <div class="correct-answer">
             <p>${STORE[questionCount].explanation}</p>
@@ -118,7 +102,7 @@ function renderAnswerWrong() {
         <button role="button" class="js-next-question">Next</button>
     </section>`
     
-    $("body").prepend(answerElement);
+    $(".container").html(answerElement);
     handleClickNextQuestion();
     console.log("`handleRenderAnswer` ran");
 }
@@ -130,12 +114,11 @@ function updateQuestionCount() {
 function handleClickNextQuestion() {
     $(".js-next-question").on("click", function(event) {
         updateQuestionCount();
-        handleHideScreen();
 
         if (questionCount < STORE.length) {
-            handleRenderQuiz();  
+            renderQuiz();  
         } else {
-            handleRenderQuizResults();
+            renderQuizResults();
         };
     })
     console.log("`handleClickNextQuestion` ran");
@@ -143,39 +126,32 @@ function handleClickNextQuestion() {
 
 function generateQuizResults() {
     if (scoreCount >= 8) {
-        return `<section class="container">
-                <header>
+        return `<header>
                     <h1>Nice Job.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>Congrats! You know your stuff. Now get out there and blockchain responsibly.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>
-            </section>`;
+                <button role="button" class="js-start-quiz">Try Again</button>`;
     } else if (scoreCount >= 5) {
-        return `<section class="container">
-                <header>
+        return `<header>
                     <h1>Not Bad.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>You have a good foundation but there is more to learn.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>
-            </section>`;
+                <button role="button" class="js-start-quiz">Try Again</button>`;
     } else {
-        return `<section class="container">
-                <header>
+        return `<header>
                     <h1>Keep Studying.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>Take the quiz again to see if you can do better.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>
-            </section>`;
-    };
-    
+                <button role="button" class="js-start-quiz">Try Again</button>`;
+    };  
 }
 
-function handleRenderQuizResults() {
+function renderQuizResults() {
     let resultsElement = generateQuizResults();
-    $("body").prepend(resultsElement);
+    $(".container").html(resultsElement);
     handleStartQuiz();
     console.log("`handleRenderResults` ran");
 }
