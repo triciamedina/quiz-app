@@ -18,6 +18,7 @@ body {
     width: 500px;
     height: 100%;
     border: 1px solid gray;
+    background: white;
     padding: 50px;
     position: absolute;
 }
@@ -74,8 +75,4 @@ fieldset {
 
 .correct-answer p {
     margin: 0px;
-}
-
-.js-hide {
-    display: none;
 }

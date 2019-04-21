@@ -1,7 +1,6 @@
 // TO DOs
-// 1. Need to fix timing issue with animations so that content isn't overlapping in animateOut and animateIn
-// 2. Need to decide if I want to restart screen from start screen or first question
-// 3. Need to add animation for individual elements
+// 2. Need to restart quiz from start screen
+// 3. Need to add animation for individual elements/refine the animation
 // 4. Need to make responsive
 // 5. Need to add styling
 
@@ -18,7 +17,7 @@ function updateQuestionCount() {
     questionCount++;
 }
 
-// Event listeners
+// Event handlers
 
 function handleStartQuiz() {
     scoreCount = 0;
@@ -38,12 +37,12 @@ function handleSubmitAnswer() {
 
         if (selected === correctAnswer) {
             updateScoreCount();
-            renderAnswerCorrect();
             animateOut();
+            renderAnswerCorrect();
             console.log('answer is correct');
         } else {
-            renderAnswerWrong();
             animateOut();
+            renderAnswerWrong();
             console.log("answer is wrong");
         }
 
@@ -58,11 +57,11 @@ function handleClickNextQuestion() {
         updateQuestionCount();
 
         if (questionCount < STORE.length) {
-            renderQuiz();
-            animateOut();  
-        } else {
-            renderQuizResults();
             animateOut();
+            renderQuiz();
+        } else {
+            animateOut();
+            renderQuizResults();
         };
     })
     console.log("`handleClickNextQuestion` ran");
@@ -71,14 +70,14 @@ function handleClickNextQuestion() {
 // Animations
 
 function animateOut() {
-    $(".visible").animate({"top": "-100%"}, 800, function(){
+    $(".visible").animate({"top": "-100%"}, 500, "swing", function(){
         $(this).remove();
     });
 }
 
 function animateIn() {
-    $(".hidden").animate({"top": "0"}, 800, function() {
-        $(this).toggleClass("hidden visible")
+    $(".hidden").animate({"top": "0"}, 500, "swing", function() {
+        $(this).toggleClass("hidden visible");
     });
 }
 
@@ -153,9 +152,9 @@ function generateQuizResults() {
 // Render screens in the DOM
 
 function renderQuiz() {
-    let quizElement = generateCurrentQuestion();
-    $(".container").html(quizElement);
     animateIn();
+    let quizElement = generateCurrentQuestion();
+    $(".hidden").html(quizElement);
     renderNewContainer();
     handleSubmitAnswer();
     console.log("`handleRenderQuiz` ran");
@@ -177,7 +176,7 @@ function renderAnswerCorrect() {
     </div>    
     <button role="button" class="js-next-question">Next</button>`
     
-    $(".container").html(answerElement);
+    $(".hidden").html(answerElement);
     animateIn();
     renderNewContainer();
     handleClickNextQuestion();
@@ -197,7 +196,7 @@ function renderAnswerWrong() {
         <button role="button" class="js-next-question">Next</button>
     </div>`
     
-    $(".container").html(answerElement);
+    $(".hidden").html(answerElement);
     animateIn();
     renderNewContainer();
     handleClickNextQuestion();
@@ -207,7 +206,7 @@ function renderAnswerWrong() {
 function renderQuizResults() {
     animateIn();
     let resultsElement = generateQuizResults();
-    $(".container").html(resultsElement);
+    $(".hidden").html(resultsElement);
     renderNewContainer();
     handleStartQuiz();
     console.log("`handleRenderResults` ran");
