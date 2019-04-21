@@ -1,20 +1,96 @@
+// TO DOs
+// 1. Need to fix timing issue with animations so that content isn't overlapping in animateOut and animateIn
+// 2. Need to decide if I want to restart screen from start screen or first question
+// 3. Need to add animation for individual elements
+// 4. Need to make responsive
+// 5. Need to add styling
+
 'use strict';
 
 let questionCount;
 let scoreCount;
+
+function updateScoreCount() {
+    scoreCount++;
+}
+
+function updateQuestionCount() {
+    questionCount++;
+}
+
+// Event listeners
 
 function handleStartQuiz() {
     scoreCount = 0;
     questionCount = 0;
 
     $(".js-start-quiz").on("click", function(event) {
+        animateOut();
         renderQuiz();  
         console.log("`handleStartQuiz` ran");
     });
 }
 
+function handleSubmitAnswer() {
+    $("form").submit(function(event) {
+        let selected = $("input:checked").val();
+        let correctAnswer = STORE[questionCount].answer;
+
+        if (selected === correctAnswer) {
+            updateScoreCount();
+            renderAnswerCorrect();
+            animateOut();
+            console.log('answer is correct');
+        } else {
+            renderAnswerWrong();
+            animateOut();
+            console.log("answer is wrong");
+        }
+
+        event.preventDefault();
+        console.log("Button works!");
+    });
+    console.log("`handleSubmitAnswer` ran");
+}
+
+function handleClickNextQuestion() {
+    $(".js-next-question").on("click", function(event) {
+        updateQuestionCount();
+
+        if (questionCount < STORE.length) {
+            renderQuiz();
+            animateOut();  
+        } else {
+            renderQuizResults();
+            animateOut();
+        };
+    })
+    console.log("`handleClickNextQuestion` ran");
+}
+
+// Animations
+
+function animateOut() {
+    $(".visible").animate({"top": "-100%"}, 800, function(){
+        $(this).remove();
+    });
+}
+
+function animateIn() {
+    $(".hidden").animate({"top": "0"}, 800, function() {
+        $(this).toggleClass("hidden visible")
+    });
+}
+
+// Content generation
+
+function generateContainer() {
+    return `<section class="container hidden"></section>`;
+}
+
 function generateCurrentQuestion() {
-    return `<header>
+    return `<div>
+            <header>
                 <span id="score">Score: ${scoreCount}</span>
                 <h2>Question ${STORE[questionCount].number} of 10</h2>
             </header>
@@ -39,39 +115,55 @@ function generateCurrentQuestion() {
                 </div>
             </fieldset>
             <button type="submit" role="button" class="js-submit-answer">Submit</button>
-            </form>`
+            </form>
+            </div>`
 }
+
+function generateQuizResults() {
+    if (scoreCount >= 8) {
+        return `<div>
+                <header>
+                    <h1>Nice Job.</h1>
+                    <h2>You scored ${scoreCount} out of 10</h2>
+                </header>
+                <p>Congrats! You know your stuff. Now get out there and blockchain responsibly.</p>
+                <button role="button" class="js-start-quiz">Try Again</button>
+                </div>`;
+    } else if (scoreCount >= 5) {
+        return `<div>
+                <header>
+                    <h1>Not Bad.</h1>
+                    <h2>You scored ${scoreCount} out of 10</h2>
+                </header>
+                <p>You have a good foundation but there is more to learn.</p>
+                <button role="button" class="js-start-quiz">Try Again</button>
+                </div>`;
+    } else {
+        return `<div>
+                <header>
+                    <h1>Keep Studying.</h1>
+                    <h2>You scored ${scoreCount} out of 10</h2>
+                </header>
+                <p>Take the quiz again to see if you can do better.</p>
+                <button role="button" class="js-start-quiz">Try Again</button>
+                </div`;
+    };  
+}
+
+// Render screens in the DOM
 
 function renderQuiz() {
     let quizElement = generateCurrentQuestion();
-    // Animation can go here?
     $(".container").html(quizElement);
+    animateIn();
+    renderNewContainer();
     handleSubmitAnswer();
     console.log("`handleRenderQuiz` ran");
 }
 
-function updateScoreCount() {
-    scoreCount++;
-}
-
-function handleSubmitAnswer() {
-    $("#js-quiz-form").submit(function(event) {
-        let selected = $("input:checked").val();
-        let correctAnswer = STORE[questionCount].answer;
-
-        if (selected === correctAnswer) {
-            updateScoreCount();
-            renderAnswerCorrect();
-            console.log('answer is correct');
-        } else {
-            renderAnswerWrong();
-            console.log("answer is wrong");
-        }
-
-        event.preventDefault();
-        console.log("Button works!");
-    });
-    console.log("`handleSubmitAnswer` ran");
+function renderNewContainer() {
+    let newContainer = generateContainer();
+    $(".wrapper").append(newContainer);
 }
 
 function renderAnswerCorrect() {
@@ -86,72 +178,37 @@ function renderAnswerCorrect() {
     <button role="button" class="js-next-question">Next</button>`
     
     $(".container").html(answerElement);
+    animateIn();
+    renderNewContainer();
     handleClickNextQuestion();
     console.log("`handleRenderAnswer` ran");
 }
 
 function renderAnswerWrong() {
     let answerElement = 
-    `<header>
-        <h2>Score: ${scoreCount}</h2>
-        <div class="result">That's Wrong!</div>
+    `<div>
+        <header>
+            <h2>Score: ${scoreCount}</h2>
+            <div class="result">That's Wrong!</div>
         </header>
         <div class="correct-answer">
             <p>${STORE[questionCount].explanation}</p>
         </div>    
         <button role="button" class="js-next-question">Next</button>
-    </section>`
+    </div>`
     
     $(".container").html(answerElement);
+    animateIn();
+    renderNewContainer();
     handleClickNextQuestion();
     console.log("`handleRenderAnswer` ran");
 }
 
-function updateQuestionCount() {
-    questionCount++;
-}
-
-function handleClickNextQuestion() {
-    $(".js-next-question").on("click", function(event) {
-        updateQuestionCount();
-
-        if (questionCount < STORE.length) {
-            renderQuiz();  
-        } else {
-            renderQuizResults();
-        };
-    })
-    console.log("`handleClickNextQuestion` ran");
-}
-
-function generateQuizResults() {
-    if (scoreCount >= 8) {
-        return `<header>
-                    <h1>Nice Job.</h1>
-                    <h2>You scored ${scoreCount} out of 10</h2>
-                </header>
-                <p>Congrats! You know your stuff. Now get out there and blockchain responsibly.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>`;
-    } else if (scoreCount >= 5) {
-        return `<header>
-                    <h1>Not Bad.</h1>
-                    <h2>You scored ${scoreCount} out of 10</h2>
-                </header>
-                <p>You have a good foundation but there is more to learn.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>`;
-    } else {
-        return `<header>
-                    <h1>Keep Studying.</h1>
-                    <h2>You scored ${scoreCount} out of 10</h2>
-                </header>
-                <p>Take the quiz again to see if you can do better.</p>
-                <button role="button" class="js-start-quiz">Try Again</button>`;
-    };  
-}
-
 function renderQuizResults() {
+    animateIn();
     let resultsElement = generateQuizResults();
     $(".container").html(resultsElement);
+    renderNewContainer();
     handleStartQuiz();
     console.log("`handleRenderResults` ran");
 }
