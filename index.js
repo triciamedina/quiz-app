@@ -1,8 +1,3 @@
-// TO DOs
-// 1. Need to add animation for individual elements/refine the animation
-// 2. Need to add styling
-// 3. Need to make responsive
-
 'use strict';
 
 let questionCount;
@@ -65,27 +60,27 @@ function renderQuiz() {
 function generateCurrentQuestion() {
     return `<div class="box">
             <header>
-                <span id="score">Score: ${scoreCount}</span>
-                <h2>Question ${STORE[questionCount].number} of 10</h2>
+                <span id="score">Score: ${scoreCount}/${questionCount}</span>
+                <h1 id="question-number">Question ${STORE[questionCount].number} of 10</h1>
             </header>
             <form class="js-quiz-form">
             <fieldset>
                 <legend class="question">${STORE[questionCount].question}</legend>
                 <label for="answer-1" class="radio-container">
                     <input type="radio" name="question" id="answer-1" value="${STORE[questionCount].options[0]}" required>
-                    ${STORE[questionCount].options[0]}
+                    <span class="option-text">${STORE[questionCount].options[0]}</span>
                 </label>
                 <label for="answer-2" class="radio-container">
                     <input type="radio" name="question" id="answer-2" value="${STORE[questionCount].options[1]}" required>
-                    ${STORE[questionCount].options[1]}
+                    <span class="option-text">${STORE[questionCount].options[1]}</span>
                 </label>
                 <label for="answer-3" class="radio-container">
                     <input type="radio" name="question" id="answer-3" value="${STORE[questionCount].options[2]}" required>
-                    ${STORE[questionCount].options[2]}
+                    <span class="option-text">${STORE[questionCount].options[2]}</span>
                 </label>
                 <label for="answer-4" class="radio-container">
                     <input type="radio" name="question" id="answer-4" value="${STORE[questionCount].options[3]}" required>
-                    ${STORE[questionCount].options[3]}
+                    <span class="option-text">${STORE[questionCount].options[3]}</span>
                 </label>
             </fieldset>
             <button type="submit" role="button" class="js-submit-answer">Submit</button>
@@ -120,9 +115,11 @@ function renderAnswerCorrect() {
     let answerElement = 
     `<div class="box">
         <header>
-            <h2>Score: ${scoreCount}</h2>
-            <div class="result">That's Right!</div>
+            <h1 id="result">That&rsquo;s Right!</h1>
         </header>
+        <div class="radio-container">
+            <span id="answer-display">${STORE[questionCount].answer}</span>
+        </div>
         <div class="correct-answer">
          <p>${STORE[questionCount].explanation}</p>
         </div>    
@@ -139,9 +136,11 @@ function renderAnswerWrong() {
     let answerElement = 
     `<div class="box">
         <header>
-            <h2>Score: ${scoreCount}</h2>
-            <div class="result">That's Wrong!</div>
+            <h1 id="result">Not Quite.</h1>
         </header>
+        <div class="radio-container">
+            <span id="answer-display">${STORE[questionCount].answer}</span>
+        </div>
         <div class="correct-answer">
             <p>${STORE[questionCount].explanation}</p>
         </div>    
@@ -180,7 +179,7 @@ function generateQuizResults() {
     if (scoreCount >= 8) {
         return `<div class="box">
                 <header>
-                    <h1>Nice Job.</h1>
+                    <h1 id="final-result">Nice Job.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>Congrats! You know your stuff. Now get out there and blockchain responsibly.</p>
@@ -189,7 +188,7 @@ function generateQuizResults() {
     } else if (scoreCount >= 5) {
         return `<div class="box">
                 <header>
-                    <h1>Not Bad.</h1>
+                    <h1 id="final-result">Not Bad.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>You have a good foundation but there is more to learn.</p>
@@ -198,7 +197,7 @@ function generateQuizResults() {
     } else {
         return `<div class="box">
                 <header>
-                    <h1>Keep Studying.</h1>
+                    <h1 id="final-result">Keep Studying.</h1>
                     <h2>You scored ${scoreCount} out of 10</h2>
                 </header>
                 <p>Take the quiz again to see if you can do better.</p>
@@ -232,7 +231,7 @@ function renderStartScreen() {
 function generateStartScreen() {
     return `<div class="box">
                     <header>
-                        <h1>What Is Blockchain?</h1>
+                        <h1 id="quiz-title">What Is Blockchain?</h1>
                     </header>
                     <p>You may have heard of the cryptocurrency Bitcoin, but how much do you really know about the technology behind it?</p>
                     <button role="button" class="js-start-quiz">Start Quiz</button>

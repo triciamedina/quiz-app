@@ -11,7 +11,7 @@ const STORE = [
             "A video game that allows players to purchase, collect, breed, and sell various types of virtual cats",
         ],
         answer: "A distributed and public digital ledger that is used to record transactions across a network",
-        explanation: "Blockchain technology is neither a company nor an app. At its most basic level, a blockchain is a growing list of records containing digital information (the “blocks”), which are linked using cryptography. Data contained within the blockchain is stored in a public database distributed across computers in a network so that any involved record cannot be altered retroactively, without the alteration of all subsequent blocks.",
+        explanation: "Blockchain technology is neither a company nor an app. At its most basic level, a blockchain is a growing list of records containing digital information (the “blocks”), which are linked using cryptography. Data contained within the blockchain is stored in a public database distributed across computers in a network.",
     },
     {
         number: 2,
@@ -47,7 +47,7 @@ const STORE = [
             "A device connected to a blockchain network",
         ],
         answer: "A device connected to a blockchain network",
-        explanation: "A node can be any active electronic device, including a computer, phone or even a printer, as long as it is connected to the internet and as such has an IP address. The role of a node is to support the network by maintaining a copy of a blockchain and, in some cases, to process transactions. All nodes are equal in importance on a blockchain, but a node can have different roles in making a blockchain work.",
+        explanation: "A node can be any active electronic device, including a computer, phone or even a printer, as long as it is connected to the internet. The role of a node is to support the network by maintaining a copy of a blockchain and, in some cases, to process transactions. All nodes are equal in importance on a blockchain, but a node can have different roles in making a blockchain work.",
     },
     {
         number: 5,
@@ -59,19 +59,19 @@ const STORE = [
             "Tokens",
         ],
         answer: "Consensus protocols",
-        explanation: "A consensus protocol is a set of rules that describe how the communication and transmission of data between electronic devices, such as nodes, works. Consensus is achieved when enough devices are in agreement about what is true and what should be recorded onto a blockchain. Therefore, consensus protocols are the governing rules that allow devices that are scattered across the world to factually come to an agreement, allowing a blockchain network to function without being corrupted."
+        explanation: "A consensus protocol is a set of rules that describe how the communication and transmission of data between electronic devices, such as nodes, works. Consensus is achieved when enough devices are in agreement about what is true and what should be recorded onto a blockchain."
     },
     {
         number: 6,
         question: "There are a variety of consensus protocols in blockchain. What is the consensus protocol introduced by Bitcoin?",
         options: [
-            "Proof of Stake",
-            "Delegated Proof of Stake",
-            "Proof of Purchase",
-            "Proof of Work",
+            "Proof of stake",
+            "Delegated proof of stake",
+            "Proof of purchase",
+            "Proof of work",
         ],
-        answer: "Proof of Work",
-        explanation: "Proof of work is the consensus protocol introduced by Bitcoin and used widely by many other cryptocurrencies. The process is known as mining and the nodes on the network are known as “miners”. The “proof of work” comes in the form of an answer to a mathematical problem, one that requires considerable work to arrive at, but is easily verified to be correct once the answer has been reached. However, many regard proof of work as flawed and even unethical, since it has been reported that a single Bitcoin transaction, using proof of work, can consume as much electricity as an average Dutch household does in two weeks.",
+        answer: "Proof of work",
+        explanation: "Proof of work is the consensus protocol introduced by Bitcoin and used widely by many other cryptocurrencies. The process is known as mining and the nodes on the network are known as “miners”. The “proof of work” comes in the form of an answer to a mathematical problem, one that requires considerable work to arrive at, but is easily verified to be correct once the answer has been reached.",
     },
     {   
         number: 7,
