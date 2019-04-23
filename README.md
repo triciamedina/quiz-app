@@ -1,5 +1,5 @@
 # Quiz App Project
-This is a quiz app about blockchain technology created for Thinkful&rsquo;s quiz app assignment. Although I am hardly an expert in blockchain technology, I wanted to challenge myself to learn more about blockchain fundamentals by creating a quiz.
+This is a quiz app about blockchain technology created for Thinkful&rsquo;s quiz app assignment. I became interseted in blockchain after attending a few conferences and I wanted to challenge myself to learn more about blockchain fundamentals by creating a quiz.
 
 ## User experience requirements
 - The starting screen should have a button that users can click to start the quiz.
