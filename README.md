@@ -14,3 +14,10 @@ This is a quiz app about blockchain technology created for Thinkful&rsquo;s quiz
 - Users should be shown their overall score at the end of the quiz. In other words, how many questions they got right out of the total questions asked.
 - Users should be able to start a new quiz.
 
+## Technical requirements
+Your quiz app must:
+- Render answer choices in a `<form>`.
+- Use semantic HTML, along with CSS and jQuery.
+- Follow a11y best practices.
+- Use responsive design.
+- Be fully usable by keyboard (which will be easy enough if you start with a form).
