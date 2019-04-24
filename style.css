@@ -4,10 +4,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    /* background-color: #7F00FF; 
-    background-image: linear-gradient(19deg, #E100FF 0%, #7F00FF 100%); */
-    background-color: #493ed1;  /* fallback for old browsers */
+    font-size: 18px;
+    background-color: #251f75;  /* fallback for old browsers */
     background-image: -webkit-linear-gradient(19deg, #1EBFE3, #B721FF);  /* Chrome 10-25, Safari 5.1-6 */
     background-image: linear-gradient(19deg, #1EBFE3, #B721FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-attachment: fixed;
@@ -18,7 +16,7 @@ body {
 }
 
 p {
-    line-height: 22px;
+    line-height: 1.4em;
 }
 
 /* Section styling to enable animations */
@@ -45,14 +43,14 @@ section {
 
 /* Container for content */
 .box {
-    width: 550px;
+    width: 600px;
     min-height: 550px;
     padding: 50px;
 }
 
 h1#quiz-title, h1#final-result {
     font-size: 4em;
-    line-height: 70px;
+    line-height: 72px;
 }
 
 h1#result {
@@ -94,7 +92,7 @@ button:hover, button:focus {
     font-size: 2em;
     margin-bottom: 25px;
     margin-top: 40px;
-    line-height: 35px;
+    line-height: 42px;
 }
 
 #score {
@@ -239,10 +237,19 @@ span#answer-display {
 
 /* Mobile */
 @media screen and (max-width: 480px) {
+    section {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute; /* THIS IS REQUIRED FOR THE ANIMATION*/
+    }
+
     .box {
         width: 320px;
-        min-height: 480px;
-        padding: 20px;
+        min-height: auto;
+        padding: 15px;
     }
 
     h1#quiz-title, h1#final-result {
@@ -250,28 +257,28 @@ span#answer-display {
         line-height: 42px;
     }
 
-    /* h1#final-result {
-        font-size: 2.5em;
-        line-height: 42px;
-    } */
-
     .question, h1#result {
         font-weight: bold;
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        line-height: 25px;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+        line-height: 27px;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 23px;
     }
 
     label {
-        font-size: .9em;
+        font-size: .8em;
     }
 
     span#answer-display{
-        font-size: .9em;
+        font-size: .8em;
     }
 
     button {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .radio-container {
